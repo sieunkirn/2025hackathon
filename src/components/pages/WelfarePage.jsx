@@ -96,7 +96,12 @@ export default function WelfarePage() {
                     </button>
                 ))}
             </section>
+            {/* 플로팅 챗봇 */}
+            <button className="floating-chatbot" onClick={handleGoChatbot} aria-label="챗봇 열기">
+                <img src="/images/chatbot.png" alt="챗봇" />
+            </button>
         </div>
     )
 }
+
 
