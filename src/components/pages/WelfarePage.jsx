@@ -1,3 +1,4 @@
+// pages/WelfarePage.jsx
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../../contexts/AppContext.jsx'
@@ -10,8 +11,8 @@ export default function WelfarePage() {
 
     const handleInfoEdit = () => navigate('/info')
     const goDetail = () => navigate('/policy')
+    const handleGoChatbot = () => navigate('/chatbot') // ✅ 추가
 
-    // 상단 리스트(필터 대상)
     const allPolicies = [
         { id: 1, title: '전북 구강보건사업', org: '구강건강관리', due: '25.12.31(수) 마감', category: '보건/의료' },
         { id: 2, title: '서울 청년월세 지원', org: '서울특별시',   due: '상시',              category: '생활/안전' },
@@ -19,7 +20,6 @@ export default function WelfarePage() {
         { id: 4, title: '전남 장성 숙박할인', org: '장성군',       due: '25.12.31(수) 마감', category: '신규' },
     ]
 
-    // ✅ 카테고리 아래 추가로 노출할 카드들
     const morePolicies = [
         { id: 101, title: '경기 농촌일손 긴급지원', org: '경기도',       due: '25.09.30(화) 마감' },
         { id: 102, title: '대전 어르신 검진비 지원', org: '대전광역시', due: '25.12.31(수) 마감' },
@@ -82,7 +82,7 @@ export default function WelfarePage() {
                 ))}
             </section>
 
-            {/* ✅ 카테고리 아래 추가 리스트 */}
+            {/* 카테고리 아래 추가 리스트 */}
             <section className="policy-list policy-list--more">
                 {morePolicies.map(p => (
                     <button key={p.id} className="policy-row" onClick={goDetail} type="button">
@@ -96,6 +96,7 @@ export default function WelfarePage() {
                     </button>
                 ))}
             </section>
+
             {/* 플로팅 챗봇 */}
             <button className="floating-chatbot" onClick={handleGoChatbot} aria-label="챗봇 열기">
                 <img src="/images/chatbot.png" alt="챗봇" />
@@ -103,5 +104,3 @@ export default function WelfarePage() {
         </div>
     )
 }
-
-
