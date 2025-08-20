@@ -81,19 +81,15 @@ export default function HomePage() {
                     ))}
                 </section>
 
-                {/*/!* 카테고리 칩 *!/*/}
-                {/*<section className="filter-chips filter-chips--below">*/}
-                {/*    {categories.map(c => (*/}
-                {/*        <button*/}
-                {/*            key={c}*/}
-                {/*            className={`chip ${activeCategory === c ? 'chip--active' : ''}`}*/}
-                {/*            onClick={() => setActiveCategory(c)}*/}
-                {/*            type="button"*/}
-                {/*        >*/}
-                {/*            {c}*/}
-                {/*        </button>*/}
-                {/*    ))}*/}
-                {/*</section>*/}
+                <img
+                    src="/images/alarm.png"
+                    alt="알림"
+                    style={{ cursor: 'pointer' }}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleInfoEdit();
+                    }}
+                />
 
 
                 {/* 리스트 2: 추가 리스트 */}
