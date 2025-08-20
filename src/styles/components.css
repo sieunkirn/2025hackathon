@@ -823,13 +823,15 @@
 
 /* 시작하기 버튼 - 정확한 디자인 스펙 */
 .start-button-custom {
-    /* 기존 디자인 스펙 유지 */
+    /* 중앙 정렬 기본값 */
     position: absolute;
-    justify-content: center; /* 가로 중앙 */
+    justify-content: center;
     align-items: center;
-    left: 26px;
-    top: 650px;                  /* 조정된 위치 */
-    width: 338px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 40px;
+    top: auto;
+    width: min(338px, calc(100% - 32px));
     height: 52px;
     background-color: #594D3F;
     color: #FFFFFF;
@@ -839,22 +841,20 @@
     font-size: 16px;
     font-weight: 600;
     font-family: inherit;
-    z-index: 10;                 /* 이미지 위에 표시 */
-
-    /* 인터랙션 효과 */
+    z-index: 10;
     transition: all 0.2s ease;
     box-shadow: 0 2px 6px rgba(89, 77, 63, 0.2);
 }
 
 /* 버튼 호버 효과 */
 .start-button-custom:hover {
-    background-color: #4a3f35;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(89, 77, 63, 0.3);
+    background-color: #4a3f35; /* 색만 변경, 위치 고정 */
+    transform: translateX(-50%);
+    box-shadow: 0 2px 6px rgba(89, 77, 63, 0.2);
 }
 
 .start-button-custom:active {
-    transform: translateY(0);
+    transform: translateX(-50%);
     box-shadow: 0 2px 4px rgba(89, 77, 63, 0.2);
 }
 
@@ -1031,7 +1031,7 @@
 
 .voice-btn,
 .search-btn {
-    background: none;
+    background: #8EBB6A;
     border: none;
     font-size: 16px;
     cursor: pointer;
@@ -1196,13 +1196,9 @@
         width: min(338px, calc(100% - 32px));
     }
 
-    .start-button-custom:hover {
-        transform: translateX(-50%) translateY(-1px);
-    }
+    .start-button-custom:hover { transform: translateX(-50%); }
 
-    .start-button-custom:active {
-        transform: translateX(-50%) translateY(0);
-    }
+    .start-button-custom:active { transform: translateX(-50%); }
 }
 
 @media (max-width: 375px) {
@@ -1244,9 +1240,7 @@
         font-size: 14px;
     }
 
-    .start-button-custom:hover {
-        transform: translateX(-50%) translateY(-1px);
-    }
+    .start-button-custom:hover { transform: translateX(-50%); }
 }
 
 /* 큰 화면에서 앱 컨테이너 강조 */
@@ -1496,10 +1490,11 @@ button:focus-visible,
     background: #f9f9f9;
 }
 
-.chat-area {
+/* .chat-area {
     flex: 1;
-    padding: 16px;
+    padding: 18px 16px 16px;
     overflow-y: auto;
+    background: #ffffff;
 }
 
 .chat-bubble {
@@ -1513,16 +1508,50 @@ button:focus-visible,
 }
 
 .bot-bubble {
-    background: #e5e5ea;
+    background: #8EBB6A;
     align-self: flex-start;
 }
 
 .user-bubble {
-    background: #4caf50;
+    background: #8EBB6A;
     color: white;
     align-self: flex-end;
+} */
+
+/* 채팅 영역이 flex column 이므로, 기본적으로 왼쪽 정렬 */
+.chat-area {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
 }
 
+/* 봇 말풍선: 왼쪽 정렬 */
+.bot-bubble {
+    align-self: flex-start;
+    background-color: #f0f0f0;
+    color: #000;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin: 6px 0;
+    max-width: 70%;
+}
+
+/* 내 말풍선: 오른쪽 벽 붙이기 */
+.user-bubble {
+    align-self: flex-end;   /* ✅ 오른쪽 끝으로 */
+    background-color: #7cb342; /* 초록 톤 (원하는 색으로 바꾸세요) */
+    color: white;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin: 6px 0;
+    max-width: 70%;
+}
+
+/* 말풍선 안 텍스트 */
+.bubble-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
 
 
 
@@ -1573,23 +1602,50 @@ button:focus-visible,
 }
 .chat-bubble {
     max-width: 76%;
-    padding: 10px 14px;
-    margin-bottom: 12px;
-    border-radius: 16px;
+    padding: 12px 14px;
+    margin: 8px 0 14px;
+    border-radius: 18px;
     line-height: 1.45;
     white-space: pre-wrap;
     font-size: 15px;
     word-break: break-word;
+    position: relative;
 }
 .bot-bubble {
-    background: #e9f0e6;
-    color: #224422;
+    background: #F5F6F8; /* 챗봇 말풍선 배경 */
+    color: #111111;     /* 챗봇 말풍선 글자 */
     align-self: flex-start;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    margin-right: auto; /* 왼쪽 정렬 고정 */
 }
 .user-bubble {
-    background: #4caf50;
-    color: #fff;
+    background: #8EBB6A; /* 내 말풍선 배경 */
+    color: #FFFFFF;     /* 내 말풍선 글자 */
     align-self: flex-end;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    margin-left: auto; /* 오른쪽에 딱 붙도록 */
+}
+.bot-bubble::after {
+    content: '';
+    position: absolute;
+    left: -6px;
+    bottom: 8px;
+    width: 10px;
+    height: 10px;
+    background: inherit;
+    transform: rotate(45deg);
+    border-bottom-left-radius: 3px;
+}
+.user-bubble::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    bottom: 8px;
+    width: 10px;
+    height: 10px;
+    background: inherit;
+    transform: rotate(45deg);
+    border-top-right-radius: 3px;
 }
 .user-bubble.ghost { opacity: 0.6; }
 
@@ -1598,7 +1654,7 @@ button:focus-visible,
     position: sticky;
     bottom: 0;
     background: #fff;
-    padding: 14px 16px 18px;
+    padding: 18px 16px 26px;
     display: flex;
     gap: 12px;
     align-items: center;
@@ -2183,7 +2239,7 @@ button:focus-visible,
     cursor: pointer;
     padding: 0 16px;
 }
-.voice-btn { background: #6ec065; color: #fff; }
+.voice-btn { background: #8EBB6A; color: #fff; }
 .stop-btn  { background: #f04b4b; color: #fff; }
 .ptt-btn   { background: #eef4eb; color: #2d4b23; border: 1px solid #dfe7db; }
 
@@ -2207,7 +2263,7 @@ button:focus-visible,
 .chatbot-page .voice-sheet {
     background: transparent;
     box-shadow: none;
-    padding: 12px 0 28px;
+    padding: 12px 0 32px;
 }
 .chatbot-page .voice-btn,
 .chatbot-page .stop-btn {
@@ -2226,7 +2282,23 @@ button:focus-visible,
 .chatbot-page .ptt-btn { display: none; }
 
 /* ensure chat area leaves space for mic */
-.chatbot-page .chat-area { padding-bottom: 120px; }
+.chatbot-page .chat-area { padding-bottom: 140px; }
+
+/* mic pulse */
+.chatbot-page .voice-btn { position: relative; }
+.chatbot-page .voice-btn::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: rgba(142,187,106,0.15);
+    animation: pulse 1.6s ease-out infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    70% { transform: scale(1.15); opacity: 0; }
+    100% { transform: scale(1.15); opacity: 0; }
+}
 
 /* ✅ 선택된 칩 (검정색 표시) */
 .chip--active {
