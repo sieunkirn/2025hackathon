@@ -1,18 +1,18 @@
-// pages/WelfarePage.jsx
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../../contexts/AppContext.jsx'
 import TabHeader from '../common/TabHeader.jsx'
 import '../../styles/components.css'
 
-export default function WelfarePage() {
+export default function HomePage() {
     const { userData } = useApp()
     const navigate = useNavigate()
 
     const handleInfoEdit = () => navigate('/info')
-    const goDetail = () => navigate('/policy')
-    const handleGoChatbot = () => navigate('/chatbot') // ✅ 추가
+    const handleGoPolicy = () => navigate('/policy')
+    const handleGoChatbot = () => navigate('/chatbot')
 
+    // WelfarePage와 동일한 리스트/카테고리 구성
     const allPolicies = [
         { id: 1, title: '전북 구강보건사업', org: '구강건강관리', due: '25.12.31(수) 마감', category: '보건/의료' },
         { id: 2, title: '서울 청년월세 지원', org: '서울특별시',   due: '상시',              category: '생활/안전' },
@@ -28,74 +28,90 @@ export default function WelfarePage() {
 
     const categories = ['전체', '생활/안전', '보건/의료', '신규', '인기']
     const [activeCategory, setActiveCategory] = useState('전체')
-
-    const filtered =
-        activeCategory === '전체'
-            ? allPolicies
-            : allPolicies.filter(p => p.category === activeCategory)
-
-    const count = userData?.recommendedCount ?? 2
+    const filtered = activeCategory === '전체' ? allPolicies : allPolicies.filter(p => p.category === activeCategory)
 
     return (
-        <div className="welfare-page">
+        <div className="home-page">
             <TabHeader />
 
-            {/* 상단 추천복지 박스 */}
+            {/* ✅ WelfarePage 스타일/구조를 그대로 적용 */}
             <div className="page-content welfare-hero">
-                <div className="welfare-hero__panel">
+                <div
+                    className="welfare-hero__panel"
+                    onClick={handleGoPolicy}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault()
+                            handleGoPolicy()
+                        }
+                    }}
+                    style={{ cursor: 'pointer' }}
+                >
                     <div className="welfare-hero__head">
                         <span className="welfare-hero__title">추천 복지</span>
-                        <button type="button" className="linklike" onClick={handleInfoEdit}>
+                        <button
+                            type="button"
+                            className="linklike"
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                handleInfoEdit()
+                            }}
+                        >
                             정보수정 &gt;
                         </button>
                     </div>
-                    <div className="welfare-hero__count">{count}건</div>
+                    <div className="welfare-hero__count">{userData?.recommendedCount ?? 2}건</div>
                 </div>
+
+                {/* 리스트 1: 카테고리 필터 대상 */}
+                <section className="policy-list">
+                    {/*<h4>많이 본 정책</h4>*/}
+                    {filtered.map(p => (
+                        <button key={p.id} className="policy-row" onClick={handleGoPolicy} type="button">
+                            <img className="policy-row__logo" src="/images/govLogo.png" alt="보건복지부" />
+                            <div className="policy-row__body">
+                                <p className="policy-row__title">{p.title}</p>
+                                <p className="policy-row__meta">
+                                    {p.org} <span className="dot">•</span> {p.due}
+                                </p>
+                            </div>
+                        </button>
+                    ))}
+                </section>
+
+                {/* 카테고리 칩 */}
+                <section className="filter-chips filter-chips--below">
+                    {categories.map(c => (
+                        <button
+                            key={c}
+                            className={`chip ${activeCategory === c ? 'chip--active' : ''}`}
+                            onClick={() => setActiveCategory(c)}
+                            type="button"
+                        >
+                            {c}
+                        </button>
+                    ))}
+                </section>
+
+
+                {/* 리스트 2: 추가 리스트 */}
+                <section className="policy-list policy-list--more">
+                    {/*<h4>신규 정책</h4>*/}
+                    {morePolicies.map(p => (
+                        <button key={p.id} className="policy-row" onClick={handleGoPolicy} type="button">
+                            <img className="policy-row__logo" src="/images/govLogo.png" alt="보건복지부" />
+                            <div className="policy-row__body">
+                                <p className="policy-row__title">{p.title}</p>
+                                <p className="policy-row__meta">
+                                    {p.org} <span className="dot">•</span> {p.due}
+                                </p>
+                            </div>
+                        </button>
+                    ))}
+                </section>
             </div>
-
-            {/* 필터 대상 리스트 */}
-            <section className="policy-list">
-                {filtered.map(p => (
-                    <button key={p.id} className="policy-row" onClick={goDetail} type="button">
-                        <img className="policy-row__logo" src="/images/govLogo.png" alt="보건복지부" />
-                        <div className="policy-row__body">
-                            <p className="policy-row__title">{p.title}</p>
-                            <p className="policy-row__meta">
-                                {p.org} <span className="dot">•</span> {p.due}
-                            </p>
-                        </div>
-                    </button>
-                ))}
-            </section>
-
-            {/* 카테고리 칩 */}
-            <section className="filter-chips filter-chips--below">
-                {categories.map(c => (
-                    <button
-                        key={c}
-                        className={`chip ${activeCategory === c ? 'chip--active' : ''}`}
-                        onClick={() => setActiveCategory(c)}
-                        type="button"
-                    >
-                        {c}
-                    </button>
-                ))}
-            </section>
-
-            {/* 카테고리 아래 추가 리스트 */}
-            <section className="policy-list policy-list--more">
-                {morePolicies.map(p => (
-                    <button key={p.id} className="policy-row" onClick={goDetail} type="button">
-                        <img className="policy-row__logo" src="/images/govLogo.png" alt="보건복지부" />
-                        <div className="policy-row__body">
-                            <p className="policy-row__title">{p.title}</p>
-                            <p className="policy-row__meta">
-                                {p.org} <span className="dot">•</span> {p.due}
-                            </p>
-                        </div>
-                    </button>
-                ))}
-            </section>
 
             {/* 플로팅 챗봇 */}
             <button className="floating-chatbot" onClick={handleGoChatbot} aria-label="챗봇 열기">
