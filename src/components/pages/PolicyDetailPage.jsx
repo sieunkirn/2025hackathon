@@ -42,11 +42,17 @@ export default function PolicyDetailPage() {
 
             <section className="detail-section">
                 <h2>지원내용</h2>
-                <ul>
+                <ul className="bullet-list">
                     <li>대상업소: 전남관광플랫폼(JNTOUR)에 등록된 장성군 숙박업소</li>
-                    <li>할인내용: 10만원 이상(4만원), 7만원 이상(3만원), 5만원 이상(2만원)</li>
-                    <li>할인내용: 10만원 이상(4만원), 7만원 이상(3만원), 5만원 이상(2만원)</li>
-                    <li>할인내용: 10만원 이상(4만원), 7만원 이상(3만원), 5만원 이상(2만원)</li>
+                    <li>
+                        할인구간:
+                        <ul className="bullet-list nested">
+                            <li>10만원 이상 결제 시 → 4만원 할인</li>
+                            <li>7만원 이상 결제 시 → 3만원 할인</li>
+                            <li>5만원 이상 결제 시 → 2만원 할인</li>
+                        </ul>
+                    </li>
+                    <li>현장 결제 기준, 타 할인과 중복 적용 불가</li>
                 </ul>
             </section>
         </div>
