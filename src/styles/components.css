@@ -1649,7 +1649,7 @@ button:focus-visible,
 .detail-title {
     flex: 1;
     text-align: center;
-    font-weight: 700;
+    font-weight: 600; /* 볼드 완화 */
     font-size: 20px;
     line-height: 1;
 }
@@ -1661,7 +1661,7 @@ button:focus-visible,
     padding: 6px 10px;
     border-radius: 999px;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 600; /* 볼드 완화 */
     margin-right: 8px;
     border: 1px solid rgba(0,0,0,0.04);
 }
@@ -1692,12 +1692,12 @@ button:focus-visible,
 
 .summary-key {
     color: #666;
-    font-weight: 600;
+    font-weight: 500; /* 볼드 완화 */
     font-size: 14px;
 }
 .summary-val {
     color: #111;
-    font-weight: 700;
+    font-weight: 600; /* 볼드 완화 */
     letter-spacing: -0.2px;
 }
 .linklike { text-decoration: none; }
@@ -1707,7 +1707,7 @@ button:focus-visible,
 }
 .detail-section h2 {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600; /* 볼드 완화 */
     margin: 8px 0 12px;
 }
 .bullet-list {
@@ -1726,6 +1726,11 @@ button:focus-visible,
     left: 0;
     color: #333;
 }
+
+/* 중첩 리스트(할인 구간 등) 시각 개선 */
+.bullet-list.nested { margin-top: 6px; padding-left: 12px; }
+.bullet-list.nested li { margin: 6px 0; line-height: 1.5; }
+.bullet-list.nested li::before { content: '•'; color: #666; }
 
 /* ===== 추천복지(마이 느낌) 상단 영역 =====
  ==================================================================================*/
