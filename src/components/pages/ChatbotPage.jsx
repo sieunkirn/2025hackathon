@@ -241,7 +241,8 @@ export default function ChatbotPage() {
     /** 네트워크 스트리밍 호출 (가능하면) + 데모 폴백 */
     const callApiStream = async (text, onChunk) => {
         try {
-            const res = await fetch('/api/chat/stream', {
+            const base = import.meta.env.VITE_API_BASE_URL || 'https://d32cc7c8eb4b.ngrok-free.app';
+            const res = await fetch(`${base}/api/chat/stream`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
