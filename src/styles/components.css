@@ -123,7 +123,7 @@
 
 .recommend-count {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     color: #007aff;   /* 필요하면 색상 변경 */
     margin-top: 16px; /* ✅ 제목/버튼과의 간격 확보 */
 }
@@ -139,7 +139,7 @@
 
 .recommend-title {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 600;
     color: #333;
 }
 
@@ -159,7 +159,7 @@
 
 .recommend-count {
     font-size: 36px;
-    font-weight: bold;
+    font-weight: 700;
     color: #8EBB6A;
     margin: 0;
 }
@@ -171,7 +171,7 @@
 
 .policy-section h3 {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 700;
     color: #333;
     margin-bottom: 16px;
 }
@@ -207,7 +207,7 @@
 
 .policy-title {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     color: #333;
     margin-bottom: 6px;
 }
@@ -229,7 +229,7 @@
     color: #2E7D2E;
     border-radius: 20px;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 /* 알림 카드 */
@@ -243,7 +243,7 @@
 
 .alert-title {
     font-size: 17px;
-    font-weight: bold;
+    font-weight: 600;
     color: #E65100;
     margin-bottom: 6px;
 }
@@ -279,7 +279,7 @@
 
 .count {
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 700;
     color: #8EBB6A;
 }
 
@@ -299,7 +299,7 @@
 
 .info-banner p {
     font-size: 17px;
-    font-weight: bold;
+    font-weight: 600;
     color: #E65100;
     line-height: 1.4;
     margin: 0;
@@ -310,7 +310,7 @@
     background: white;
     padding: 26px;
     border-radius: 12px;
-    text-align: center;
+    text-align: left; /* 마이탭 카드 내용 좌측 정렬 */
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
@@ -390,6 +390,21 @@
     }
 }
 
+/* My 전용: 좀 더 또렷한 페이드업 */
+@keyframes fadeInUpSlight {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 공통보다 아래에서 선언하여 우선 적용 */
+.my-page-container { animation: fadeInUpSlight 0.4s ease-out; }
+
 /* 상단 히어로(연회색 배경 + 탭 + 우상단 일러스트) */
 .my-hero {
     position: relative;
@@ -451,30 +466,34 @@
 .my-content {
     margin-top: -44px;
     padding-top: 0;
+    animation: fadeInUpSlight 0.4s ease-out;
+    will-change: opacity, transform;
 }
 
 /* 사용자 정보 카드 */
 .my-info-card {
     background: #fff;
     /*border: 1px solid var(--border);*/
-    border : none;
+    border : none;                  /* 요청: 테두리 제거 */
     border-radius: 16px;
     padding: 16px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    box-shadow: none;               /* 그림자도 제거하여 깔끔하게 */
+    text-align: left;               /* 내용 좌측 정렬 */
 }
 
 .my-name-line {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    letter-spacing: -0.2px;
 }
 
 .my-address-line {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
 }
 
@@ -1294,7 +1313,7 @@ button:focus-visible,
 
 .header-text .highlight {
     color: #fff;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .farmer-img {
@@ -1322,12 +1341,12 @@ button:focus-visible,
 }
 
 .recommend-title {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .recommend-count {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 700;
     margin: 0;
 }
 
@@ -1339,7 +1358,7 @@ button:focus-visible,
 
 .policy-section h3 {
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 700;
     margin: 16px 0 10px;
 }
 
@@ -1389,7 +1408,7 @@ button:focus-visible,
 }
 
 .alert-title {
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 4px;
 }
 
@@ -1401,8 +1420,13 @@ button:focus-visible,
 }
 
 .expanded-header--welfare {
+    /* 헤더는 원래 색 유지 (회색/브라운 등), 리스트 배경만 흰색 */
     background: #83634E;
+    color: #fff;
 }
+.expanded-header--welfare .tab-item { color: rgba(255,255,255,0.85); }
+.expanded-header--welfare .tab-item:hover { color: #fff; background: rgba(255,255,255,0.12); }
+.expanded-header--welfare .tab-item.active::after { background: #ffffff; }
 
 .expanded-header--my {
     background: #C7C7C7;
@@ -1625,7 +1649,7 @@ button:focus-visible,
 .detail-title {
     flex: 1;
     text-align: center;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 20px;
     line-height: 1;
 }
@@ -1639,6 +1663,7 @@ button:focus-visible,
     font-size: 12px;
     font-weight: 700;
     margin-right: 8px;
+    border: 1px solid rgba(0,0,0,0.04);
 }
 .pill--danger { background: #ffe5e7; color: #c62828; }
 .pill--info   { background: #e7f0ff; color: #1565c0; }
@@ -1649,16 +1674,18 @@ button:focus-visible,
 
 .summary-card {
     margin: 12px 16px 16px 16px;
-    background: #f6f7f9;
-    border-radius: 14px;
+    background: #f7f8fa;
+    border-radius: 16px;
     padding: 16px;
+    border: 1px solid #ececec;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .summary-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 12px 0;
     border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 .summary-row:last-child { border-bottom: none; }
@@ -1666,10 +1693,12 @@ button:focus-visible,
 .summary-key {
     color: #666;
     font-weight: 600;
+    font-size: 14px;
 }
 .summary-val {
     color: #111;
     font-weight: 700;
+    letter-spacing: -0.2px;
 }
 .linklike { text-decoration: none; }
 
@@ -1678,7 +1707,7 @@ button:focus-visible,
 }
 .detail-section h2 {
     font-size: 18px;
-    font-weight: 800;
+    font-weight: 700;
     margin: 8px 0 12px;
 }
 .bullet-list {
@@ -1688,7 +1717,7 @@ button:focus-visible,
 .bullet-list li {
     position: relative;
     padding-left: 20px;
-    line-height: 1.6;
+    line-height: 1.55;
     margin: 8px 0;
 }
 .bullet-list li::before {
@@ -1707,6 +1736,7 @@ button:focus-visible,
     background: #F5F6F8;        /* ✅ 지정 색 */
     border-radius: 20px;
     padding: 16px;
+    border: 1px solid #eee;     /* 이미지처럼 얇은 테두리 */
 }
 
 /* 헤더 라인 */
@@ -1716,8 +1746,8 @@ button:focus-visible,
     align-items: center;
     margin-bottom: 8px;
 }
-.welfare-hero__title { font-size: 15px; font-weight: 700; color: #333; }
-.welfare-hero__count { font-size: 32px; font-weight: 900; line-height: 1.1; margin: 6px 0 14px; }
+.welfare-hero__title { font-size: 15px; font-weight: 600; color: #333; }
+.welfare-hero__count { font-size: 32px; font-weight: 700; line-height: 1.1; margin: 6px 0 14px; }
 
 /* 추천 미니카드 */
 .welfare-hero__list { display: grid; gap: 12px; }
@@ -1729,7 +1759,7 @@ button:focus-visible,
 .policy-mini-card__logo { width: 38px; height: 38px; border-radius: 10px; object-fit: cover; }
 .policy-mini-card__body { flex: 1; min-width: 0; }
 .policy-mini-card__row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.policy-mini-card__title { font-weight: 800; color: #111; margin: 0; }
+.policy-mini-card__title { font-weight: 700; color: #111; margin: 0; }
 .policy-mini-card__meta { color: #6b7280; font-size: 13px; margin-top: 4px; }
 .pill { display: inline-block; padding: 4px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
 .pill--info { background: #e9f2ff; color: #2a67c7; }
@@ -1752,7 +1782,7 @@ button:focus-visible,
 }
 .policy-row__logo { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; }
 .policy-row__body { flex: 1; min-width: 0; }
-.policy-row__title { font-weight: 800; color: #111; margin: 2px 0 6px; }
+.policy-row__title { font-weight: 700; color: #111; margin: 2px 0 6px; }
 .policy-row__meta { color: #6b7280; font-size: 13px; }
 
 
@@ -1773,8 +1803,8 @@ button:focus-visible,
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 8px;
 }
-.welfare-hero__title { font-size: 15px; font-weight: 700; color: #333; }
-.welfare-hero__count { font-size: 32px; font-weight: 900; line-height: 1.1; }
+.welfare-hero__title { font-size: 15px; font-weight: 600; color: #333; }
+.welfare-hero__count { font-size: 32px; font-weight: 700; line-height: 1.1; }
 
 /* 리스트(카드) – 추천박스 바깥 */
 .policy-list { padding: 8px 16px 12px; display: grid; gap: 14px; }
@@ -1785,7 +1815,7 @@ button:focus-visible,
 }
 .policy-row__logo { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; }
 .policy-row__body { flex: 1; min-width: 0; }
-.policy-row__title { font-weight: 800; color: #111; margin: 2px 0 6px; }
+.policy-row__title { font-weight: 700; color: #111; margin: 2px 0 6px; }
 .policy-row__meta { color: #6b7280; font-size: 13px; }
 .dot { margin: 0 6px; opacity: .5; }
 
@@ -1859,6 +1889,7 @@ button:focus-visible,
     border-radius: 20px;
     padding: 16px;
     cursor: pointer;
+    border: 1px solid #eee;           /* 이미지 참고: 얇은 라인 */
 }
 .home-page .recommend-header {
     display: flex;
@@ -1873,7 +1904,7 @@ button:focus-visible,
 }
 .home-page .recommend-count {
     font-size: 32px;
-    font-weight: 900;
+    font-weight: 700;
     line-height: 1.1;
     margin: 6px 0 0;
 }
@@ -1888,8 +1919,8 @@ button:focus-visible,
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 8px;
 }
-.welfare-hero__title { font-size: 15px; font-weight: 700; color: #333; }
-.welfare-hero__count { font-size: 32px; font-weight: 900; line-height: 1.1; margin: 6px 0 0; }
+.welfare-hero__title { font-size: 15px; font-weight: 600; color: #333; }
+.welfare-hero__count { font-size: 32px; font-weight: 700; line-height: 1.1; margin: 6px 0 0; }
 
 /* 3) 섹션 타이틀/간격 통일 */
 .home-page .policy-section,
@@ -1898,7 +1929,7 @@ button:focus-visible,
 }
 .home-page .policy-section h3 {
     font-size: 16px;
-    font-weight: 900;
+    font-weight: 700;
     margin: 10px 0 12px;
     color: #111;
 }
@@ -1914,11 +1945,13 @@ button:focus-visible,
     width: 100%;
     background: #fff;
     border: 1px solid #eee;
-    border-radius: 18px;
+    border-radius: 20px;              /* 더 둥글게 */
     padding: 14px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     cursor: pointer;
     text-align: left;
+    transition: transform .18s ease, box-shadow .18s ease;
+    will-change: transform;
 }
 .home-page .policy-card + .policy-card { margin-top: 12px; } /* 홈 카드 간격 */
 .welfare-page .policy-row + .policy-row { margin-top: 14px; } /* 웰페어 카드 간격 */
@@ -1932,15 +1965,19 @@ button:focus-visible,
 
 .home-page .policy-title,
 .welfare-page .policy-row__title {
-    font-weight: 800;
+    font-weight: 700;
     color: #111;
-    margin: 2px 0 6px;
+    margin: 2px 0 4px;           /* 줄 간격 타이트하게 */
+    line-height: 1.3;
+    letter-spacing: -0.2px;
 }
 .home-page .policy-sub,
 .home-page .policy-date,
 .welfare-page .policy-row__meta {
     color: #6b7280;
     font-size: 13px;
+    line-height: 1.35;            /* 추천복지 화면과 동일 수준 */
+    letter-spacing: -0.1px;
 }
 .dot { margin: 0 6px; opacity: .5; }
 
@@ -1954,7 +1991,7 @@ button:focus-visible,
     margin-top: 6px;
 }
 .home-page .alert-title {
-    font-weight: 900;
+    font-weight: 700;
     margin: 0 0 6px;
     color: #111;
 }
@@ -1985,8 +2022,8 @@ button:focus-visible,
     border-radius: 16px;
     padding: 12px 14px;               /* ✅ 여백 축소 (Welfare 느낌) */
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    text-align: center;               /* 스샷처럼 가운데 정렬 */
-    margin: 8px 0 12px;               /* 위아래 간격도 짧게 */
+    text-align: left;                 /* 리스트와 톤 맞춤 */
+    margin: 6px 16px 8px;             /* 리스트 아래로 더 붙게 */
 }
 
 /* 제목(“정보 등록하고”)만 포인트 컬러, 굵기는 굵지 않게 */
@@ -2161,6 +2198,31 @@ button:focus-visible,
     transition: all 0.2s ease-in-out;
 }
 
+/* ================= Chatbot page polish (big center mic) ================= */
+.chatbot-page .voice-sheet {
+    background: transparent;
+    box-shadow: none;
+    padding: 12px 0 28px;
+}
+.chatbot-page .voice-btn,
+.chatbot-page .stop-btn {
+    width: 84px;
+    height: 84px;
+    min-width: 0;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    font-size: 20px;
+}
+.chatbot-page .voice-btn { background: #8EBB6A; }
+.chatbot-page .voice-btn:hover { background: #7aac5e; }
+.chatbot-page .stop-btn { background: #f04b4b; }
+.chatbot-page .voice-caption { margin-top: 8px; }
+.chatbot-page .ptt-btn { display: none; }
+
+/* ensure chat area leaves space for mic */
+.chatbot-page .chat-area { padding-bottom: 120px; }
+
 /* ✅ 선택된 칩 (검정색 표시) */
 .chip--active {
     background-color: #000;   /* 검정 배경 */
@@ -2169,4 +2231,128 @@ button:focus-visible,
     font-weight: 600;
 }
 
+
+/* ============================= */
+/* ===== Visual polish pass ===== */
+/* ============================= */
+
+/* Subtle hover for interactive cards */
+.home-page .policy-card:hover,
+.welfare-page .policy-row:hover,
+.policy-mini-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+}
+
+/* Focus-visible for non-button interactive elements */
+.welfare-hero__panel:focus-visible,
+.home-page .alert-card:focus-visible {
+    outline: 2px solid #a8c26a;
+    outline-offset: 2px;
+}
+
+/* Link-like button tone alignment */
+.linklike {
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.linklike:hover { color: #8EBB6A; }
+
+/* Unify list spacing between Home and Welfare */
+.home-page .policy-section { padding: 0 16px 12px; }
+.home-page .policy-section h3 { margin: 8px 0 8px; font-size: 16px; font-weight: 700; color: #111; }
+
+/* Button reset for .policy-row (rendered as button) */
+.policy-row {
+    border: none;
+    background: #fff;
+}
+.policy-row:focus { outline: none; }
+
+/* Compact meta line and dot spacing */
+.policy-row__meta .dot { margin: 0 6px; opacity: .5; }
+
+/* ===== Home spacing tighten (많이 본 정책/복지 카드 간격 축소) ===== */
+.home-page .policy-section { padding: 0 16px 6px; }
+.home-page .policy-section h3 { margin: 6px 0 6px; }
+.home-page .policy-section + .policy-list { margin-top: 4px; }
+.home-page .policy-list { padding: 0 16px 6px; gap: 8px; }
+.home-page .policy-row { padding: 10px 12px; }
+
+/* Extra-tight header-to-list spacing for Home */
+.home-page .page-content .policy-section { padding-bottom: 0; }
+.home-page .page-content .policy-section h3 { margin-bottom: 4px; }
+.home-page .page-content .policy-section + .policy-list { margin-top: 0; }
+
+/* ===== Unified policy list/card visuals for Home & Welfare ===== */
+.home-page .policy-list,
+.welfare-page .policy-list {
+    padding: 0 16px 10px;
+    display: grid;
+    gap: 10px;
+}
+
+.home-page .policy-row,
+.welfare-page .policy-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 18px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    cursor: pointer;
+    text-align: left;
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.home-page .policy-row__logo,
+.welfare-page .policy-row__logo { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; }
+.home-page .policy-row__title,
+.welfare-page .policy-row__title { font-weight: 700; color: #111; margin: 2px 0 4px; line-height: 1.3; letter-spacing: -0.2px; }
+.home-page .policy-row__meta,
+.welfare-page .policy-row__meta { color: #6b7280; font-size: 13px; line-height: 1.35; letter-spacing: -0.1px; }
+
+/* ==================================================================
+   HOME spacing overrides (requested):
+   - Narrower left/right paddings for title and list
+   - Tighter spacing between "많이 본 정책" and first card
+   ================================================================== */
+/* 1) Section title 좌우 여백 축소 */
+.home-page .policy-section { padding-left: 12px; padding-right: 12px; }
+/* 2) 카드 리스트 좌우 여백 축소 */
+.home-page .policy-list { padding-left: 10px; padding-right: 10px; }
+/* 3) 섹션 제목과 첫 카드 사이 간격 축소 */
+.home-page .policy-section h3 { margin-bottom: 2px; }
+/* 4) 섹션과 리스트 사이 추가 간격 제거(보강) */
+.home-page .policy-section + .policy-list { margin-top: 0; }
+
+/* ==================================================================
+   Welfare list background only (header stays as-is)
+   - Make card list/chips background white
+   - Round the very first list's top corners
+   - Seamless stacks: remove vertical gaps between list → chips → more list
+   ================================================================== */
+.welfare-hero + .policy-list { margin-top: 0; }
+.welfare-page .policy-list,
+.welfare-page .filter-chips { background: #ffffff; }
+.welfare-hero + .policy-list {
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    padding-top: 12px;
+}
+.welfare-page .filter-chips.filter-chips--below { margin-top: 0; padding-top: 8px; }
+.welfare-page .policy-list.policy-list--more {
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    padding-bottom: 20px;
+}
+
+/* 전체 리스트 영역 배경을 흰색으로 고정 (상단 탭 제외) */
+.welfare-page { background: #ffffff; }
 
