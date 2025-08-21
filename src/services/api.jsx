@@ -1,152 +1,43 @@
-// // API 베이스 URL 설정
-// const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+// src/lib/apiClient.js
+import axios from 'axios'
+
+// 우선순위: 환경변수 > Render 배포 > localhost
+const API_BASE =
+    import.meta.env.VITE_API_BASE_URL ||
+    'https://silvercare-backend.onrender.com' ||
+    'http://localhost:8080'
+
+const api = axios.create({
+    baseURL: API_BASE,
+    timeout: 15000,
+    withCredentials: false,
+    headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+    },
+})
+
+export default api
+
 //
-// class ApiService {
-//     // 고객 정보 전송
-//     static async submitCustomerInfo(customerData) {
-//         try {
-//             const response = await fetch(`${API_BASE_URL}/customers`, {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                     'Accept': 'application/json',
-//                 },
-//                 body: JSON.stringify(customerData)
-//             });
 //
-//             if (!response.ok) {
-//                 throw new Error(`HTTP error! status: ${response.status}`);
-//             }
+// // src/lib/apiClient.js
+// import axios from 'axios'
 //
-//             const result = await response.json();
-//             return result;
-//         } catch (error) {
-//             console.error('고객 정보 전송 실패:', error);
-//             throw error;
-//         }
-//     }
+// // 우선순위: 환경변수 > ngrok > localhost
+// const API_BASE =
+//     import.meta.env.VITE_API_BASE_URL ||
+//     'https://d32cc7c8eb4b.ngrok-free.app' ||
+//     'http://localhost:8080'
 //
-//     // 임시 저장 (각 단계별 저장)
-//     static async saveStepData(stepData) {
-//         try {
-//             const response = await fetch(`${API_BASE_URL}/customers/temp`, {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 body: JSON.stringify(stepData)
-//             });
+// const api = axios.create({
+//     baseURL: API_BASE,
+//     timeout: 15000,
+//     withCredentials: false,
+//     headers: {
+//         'Content-Type': 'application/json',
+//         Accept: 'application/json',
+//     },
+// })
 //
-//             if (!response.ok) {
-//                 throw new Error(`HTTP error! status: ${response.status}`);
-//             }
-//
-//             return await response.json();
-//         } catch (error) {
-//             console.error('임시 저장 실패:', error);
-//             throw error;
-//         }
-//     }
-//
-//     // 음성 데이터 전송 (선택사항)
-//     static async submitSpeechData(speechData) {
-//         try {
-//             const response = await fetch(`${API_BASE_URL}/speech`, {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 body: JSON.stringify({
-//                     transcript: speechData.transcript,
-//                     timestamp: new Date().toISOString(),
-//                     step: speechData.step,
-//                     field: speechData.field
-//                 })
-//             });
-//
-//             return await response.json();
-//         } catch (error) {
-//             console.error('음성 데이터 전송 실패:', error);
-//             throw error;
-//         }
-//     }
-// }
-//
-// export default ApiService;
-
-// API 베이스 URL 설정
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
-
-class ApiService {
-    // 고객 정보 전송
-    static async submitCustomerInfo(customerData) {
-        try {
-            const response = await fetch(`${API_BASE_URL}/customers`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                body: JSON.stringify(customerData)
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const result = await response.json();
-            return result;
-        } catch (error) {
-            console.error('고객 정보 전송 실패:', error);
-            throw error;
-        }
-    }
-
-    // 임시 저장 (각 단계별 저장)
-    static async saveStepData(stepData) {
-        try {
-            const response = await fetch(`${API_BASE_URL}/customers/temp`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(stepData)
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('임시 저장 실패:', error);
-            throw error;
-        }
-    }
-
-    // 음성 데이터 전송 (선택사항)
-    static async submitSpeechData(speechData) {
-        try {
-            const response = await fetch(`${API_BASE_URL}/speech`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    transcript: speechData.transcript,
-                    timestamp: new Date().toISOString(),
-                    step: speechData.step,
-                    field: speechData.field
-                })
-            });
-
-            return await response.json();
-        } catch (error) {
-            console.error('음성 데이터 전송 실패:', error);
-            throw error;
-        }
-    }
-}
-
-export default ApiService;
-
+// export default api
